@@ -58,29 +58,12 @@ public class Main {
         //imprimeMatriz(desvios);
         //Teste
 
-        for (int i = 0; i < pc.length; i++) {
-            pc[i]=1;
-        }
         int erroClTeste = 0;
         int erroClTreino=0;
         for (int i = 0; i < 3; i++) {//Classes
             classe = classes.get(i);
-            for (int k = (int) (classe.length*0.7); k < classe.length; k++) {//amostras
-                double x[] = classe[k][0];
-                int cl = classificar(x,medias,desvios);
-                int y=0;
-                if (classe[k][1][0]==1&&classe[k][1][1]==0&&classe[k][1][2]==0){
-                    y=1;
-                } else if (classe[k][1][0]==0&&classe[k][1][1]==1&&classe[k][1][2]==0) {
-                    y=2;
-                }else{
-                    y=3;
-                }
-                if (cl!= y){
-                    erroClTeste++;
-                }
-            }
-           // System.out.println((int) (classe.length*0.7));
+
+//            int count = 0;
             for (int k = 0 ; k < (int) (classe.length*0.7); k++) {//amostras
                 double x[] = classe[k][0];
                 int cl = classificar(x,medias,desvios);
@@ -95,9 +78,29 @@ public class Main {
                 if (cl!= y){
                     erroClTreino++;
                 }
+//                count++;
             }
+//            System.out.println(count);
+//            count = 0;
+            for (int k = (int) (classe.length*0.7); k < classe.length; k++) {//amostras
+                double x[] = classe[k][0];
+                int cl = classificar(x,medias,desvios);
+                int y=0;
+                if (classe[k][1][0]==1&&classe[k][1][1]==0&&classe[k][1][2]==0){
+                    y=1;
+                } else if (classe[k][1][0]==0&&classe[k][1][1]==1&&classe[k][1][2]==0) {
+                    y=2;
+                }else{
+                    y=3;
+                }
+                if (cl!= y){
+                    erroClTeste++;
+                }
+//                count++;
+            }
+//            System.out.println(count);
         }
-        System.out.println("Erro classificação treino: "+erroClTreino+" Erro classificação teste: "+erroClTeste);
+        System.out.println("Erro classificação treino: "+erroClTreino+"/436"+" Erro classificação teste: "+erroClTeste+"/189");
 
     }
     private static int classificar(double x[],List<ArrayList<Double>> medias,List<ArrayList<Double>> desvios){
